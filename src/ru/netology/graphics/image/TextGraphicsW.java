@@ -1,12 +1,11 @@
 package ru.netology.graphics.image;
 
 
-import java.awt.Graphics2D;
-import java.awt.Image;
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
-import javax.imageio.ImageIO;
 
 public class TextGraphicsW implements TextGraphicsConverter {
     private int maxRatio = 0;      // 0 — ограничение не применяется
@@ -20,7 +19,12 @@ public class TextGraphicsW implements TextGraphicsConverter {
 
     @Override
     public String convert(String url) throws IOException, BadImageSizeException {
-        return "";
+        try {
+            URL urlObj = new URL(url);
+            return convert(urlObj);
+        } catch (java.net.MalformedURLException e) {
+            throw new IOException("Invalid URL: " + url, e);
+        }
     }
 
     @Override
@@ -35,7 +39,7 @@ public class TextGraphicsW implements TextGraphicsConverter {
 
     @Override
     public void setMaxRatio(double maxRatio) {
-
+        this.maxRatio = (int) maxRatio;
     }
 
     @Override
@@ -44,6 +48,7 @@ public class TextGraphicsW implements TextGraphicsConverter {
             this.colorSchema = colorSchema;
         }
     }
+
 
     public String convert(URL url) throws BadImageSizeException {
         try {

@@ -2,7 +2,7 @@ package ru.netology.graphics.image;
 
 public class TextColorW implements TextColorSchema {
     // набор символов от темного к светлому
-    private final char[] CHARS = {'#', '$', '@', '%', '*', '+', '-', ' '};
+    private final char[] CHARS = {'#', '$', '@', '%', '*', '+', '-', '\''};
 
     @Override
     public char convert(int color) {
